@@ -1,0 +1,76 @@
+﻿@model HR.DAL.DbLayer.EmpPromotion
+
+@{
+    ViewBag.Title = "Редактирование продвижения";
+}
+
+<br/>
+<h3>Продвижение (@ViewBag.Emp.FirstName @ViewBag.Emp.LastName)</h3>
+<hr />
+
+@using (Html.BeginForm("Edit", "EmpPromotion", new { id = Model.EmpPromotionId }, FormMethod.Post, new { @class = "" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">    
+    
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.EmpPromotionId)
+    @Html.Hidden("EmployeeId")    
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.JobTitleId, "Должность", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("JobTitleId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.JobTitleId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Сохранить" class="btn btn-success btn-sm"/>
+        </div>
+    </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад к перечню", "Index", null, new { @class = "btn btn-info btn-sm" })
+</div>
+
+@section MyScript
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+
+    <script type="text/javascript">
+            $(function () {
+                  var culture = '@System.Threading.Thread.CurrentThread.CurrentCulture.Name'.substr(0, 2);          
+                  if (culture!='en')
+                      $('.datepicker').datepicker(
+                          {
+                              language: culture,  format: 'dd.mm.yyyy'
+                          });
+                  else
+                      $('.datepicker').datepicker({ language: culture, format: 'mm/dd/yyyy' });
+             });
+    </script>
+
+}

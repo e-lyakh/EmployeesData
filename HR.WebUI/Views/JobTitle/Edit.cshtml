@@ -1,0 +1,45 @@
+﻿@model HR.DAL.DbLayer.JobTitle
+
+@{
+    ViewBag.Title = "Редактирование должности";
+}
+
+<br/>
+<h3>Корректировка должности</h3>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.JobTitleId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NameJobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NameJobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameJobTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-success btn-sm" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад к перечню", "Index", null, new { @class = "btn btn-info btn-sm" })
+</div>
+
+
+@section MyScript
+{
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

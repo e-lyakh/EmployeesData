@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Главная страница";
+}
+
+<style>
+    .item {
+        padding: 6px 0px 6px 0px
+    }
+</style>
+
+
+<br />
+<h3>Ресурсы сайта:</h3>
+<hr/>
+
+<div>
+    <ul style="font-size:medium">             
+        <li class="item">@Html.ActionLink("Данные по сотрудникам", "Index", "Employees")</li>
+        <li class="item">@Html.ActionLink("Список должностей", "Index", "JobTitle")</li>   
+        <li class="item">@Html.ActionLink("Данные по продвижениям", "Index", "EmpPromotion")</li>
+        <li class="item">@Html.ActionLink("Фотографии сотрудников", "Index", "Photo")</li>
+    </ul>
+</div>

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<HR.DAL.DbLayer.Photo>
+
+
+@for (int r = 0, current = 0; current < Model.Count(); r++)
+{
+    <tr style="padding: 5px">
+        @for (int i = 0; i < 4 && current < Model.Count(); i++, current++)
+        {
+            <td>
+                <div>
+                    <img src="@Model.ElementAt(current).PhotoPath" height="150" />
+                    <br/>
+                    @Html.ActionLink("Удалить", "Delete", new { id = Model.ElementAt(current).PhotoId }, new
+                       {
+                           @class = "btn btn-standart btn-sm btndeletephoto",
+                           data_photo_id = Model.ElementAt(current).PhotoId,
+                           @style = "color: darkred"
+                       })
+                </div>
+                <br/>
+            </td>
+            <td>
+                <div style="padding: 25px"></div>
+            </td>
+        }        
+    </tr>
+}

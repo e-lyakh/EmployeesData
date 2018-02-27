@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Продвижения сотрудников";
+}
+
+<br />
+<h3>Продвижения сотрудников</h3>
+<br />
+
+
+<div class="row">
+    <div class="col-md-3">
+        @Html.DropDownList("EmployeeId", null, new { @class = "form-control" })
+    </div>
+
+    <div id="listpromotion" class="col-md-9">
+
+    </div>
+</div>
+
+
+@section MyScript
+{    
+    <script type="text/javascript">
+
+      $(function () {
+          $('#listpromotion').load('@Url.Action("ListProms", "EmpPromotion")', { id: $('#EmployeeId').val() });
+          $("#EmployeeId").change(function () {
+
+              var EmployeeId = $(this).val();
+              $('#listpromotion').load('@Url.Action("ListProms", "EmpPromotion")', { id: EmployeeId });
+
+          });
+
+          $('body').on('click', '.mybtndeleteprom', function (e) {
+              e.preventDefault();
+              if(confirm('Are you sure?'))
+              {
+                  $.post('@Url.Action("Delete", "EmpPromotion")', {id:$(this).attr('data-prom-id')},
+                      function(data)
+                      {
+                          if (data=="OK")
+                          {
+                              window.location.href = '/EmpPromotion/Index' + '/' + $('#EmployeeId').val();
+                          }
+                      });
+              }
+          });
+
+          //add record
+          $('body').on('click', '#createprom', function () {
+              window.location.href = '@Url.Action("Edit", "EmpPromotion")'+ '?id=0&EmployeeId='+$('#EmployeeId').val();
+          });
+
+      });
+
+    </script>
+}

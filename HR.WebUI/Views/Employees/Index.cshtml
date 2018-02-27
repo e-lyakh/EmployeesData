@@ -1,0 +1,89 @@
+﻿@model IEnumerable<HR.DAL.DbLayer.Employee>
+
+@{
+    ViewBag.Title = "Список сотрудников";
+}
+
+<br />
+<h3>Список сотрудников</h3>
+<br/>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateBirthday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.INN)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateBirthday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.INN)
+        </td>
+        <td>
+            @Html.ActionLink("Корректировать", "Edit", new { id=item.EmployeeId }, new
+                {
+                    id = "BtnEdit",
+                    @class = "btn btn-primary btn-sm"
+                })            
+            @Html.ActionLink("Удалить", "Delete", new { id=item.EmployeeId }, new
+               {
+                   id = "BtnDelete",
+                   @class = "btn btn-danger btn-sm mybtndeleteEmployee"
+               })
+        </td>
+    </tr>
+}   
+
+</table>
+
+<p>
+    <a href="@Url.Action("Create", "Employees")" class = "btn btn-success btn-sm">
+        <span class="glyphicon glyphicon-plus"></span>
+        Новый сотрудник
+    </a>
+</p>
+
+
+@section MyScript
+{
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.mybtndeleteEmployee').click(function (e)
+            {
+                if(confirm('Вы уверены?'))
+                {
+                    return true;
+                }
+                else
+                {
+                    e.preventDefault();
+                }
+            });
+
+        });
+
+    </script>
+}
+

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<HR.DAL.DbLayer.JobTitle>
+
+@{
+    ViewBag.Title = "Список должностей";
+}
+
+<br />
+<h3>Список должностей</h3>
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NameJobTitle)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+               @item.NameJobTitle
+            </td>
+            <td>
+                @Html.ActionLink("Корректировать", "Edit", new { id = item.JobTitleId }, new
+                                   {
+                                       id = "BtnEdit",
+                                       @class = "btn btn-primary btn-sm"
+                                   })
+              
+                @Html.ActionLink("Удалить", "Delete", new { id = item.JobTitleId }, new
+                           {
+                               id = "BtnDelete",
+                               @class = "btn btn-danger btn-sm mybtndeleteJobTitles"
+                           })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<p>
+    <a href="@Url.Action("Edit", "JobTitle")" class="btn btn-success btn-sm">
+        <span class="glyphicon glyphicon-plus"></span>
+        Новая должность
+    </a>
+</p>
+
+@section MyScript
+{
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.mybtndeleteJobTitles').click(function (e)
+            {
+                if(confirm('Вы уверены?'))
+                {
+                    return true;
+                }
+                else
+                {
+                    e.preventDefault();
+                }
+            });
+
+        });
+
+    </script>
+}

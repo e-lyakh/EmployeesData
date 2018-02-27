@@ -1,0 +1,49 @@
+﻿@model IEnumerable<HR.DAL.DbLayer.EmpPromotion>
+
+
+<table class="table">
+    <tr>        
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle.NameJobTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HireDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>            
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle.NameJobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HireDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.ActionLink("Корректировать", "Edit", new { id = item.EmpPromotionId }, new { @class = "btn btn-primary btn-sm mybtneditprom" })
+
+                @Html.ActionLink("Удалить", "Delete", new { id = item.EmpPromotionId }, new
+       {
+           @class = "btn btn-danger btn-sm mybtndeleteprom",
+           data_prom_id = item.EmpPromotionId
+       })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>   
+    <a href="#" id="createprom" class="btn btn-success btn-sm">
+        <span class="glyphicon glyphicon-plus"></span>
+        Новая запись
+    </a>
+</p>
